@@ -9,7 +9,7 @@ $row =  mysqli_fetch_all($query);
 $ratesql = "SELECT AVG(rating) FROM rating_table WHERE game_title= '" . $row[0][2] . "'";
 $queryrate = mysqli_query($conn, $ratesql);
 $fetchrate = mysqli_fetch_all($queryrate);
-$note = $fetchrate[0][0];
+$note = $fetchrate[0][0][0].$fetchrate[0][0][1].$fetchrate[0][0][2];
 $requestcom = "SELECT * FROM commentaire WHERE title = '" . $row[0][2] . "'";
 $querycom = mysqli_query($conn, $requestcom);
 $fetchcom = mysqli_fetch_all($querycom);

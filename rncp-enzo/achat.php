@@ -55,9 +55,8 @@ if ($conn->query($sql) === TRUE) {
         $utilisateur = $row3[0][0];
         $nom = $_POST['nom'];
         //insert into table:commande
-        $request2 = "INSERT INTO commande VALUES (NULL,3,'$nom',$total,'$description',date)";
+        $request2 = "INSERT INTO commande VALUES (NULL,$utilisateur,'$nom',$total,'$description',NOW())";
         $query2 = mysqli_query($conn, $request2);
-        var_dump($request2);
         $destruction = " DROP TABLE pannier_$_SESSION[login] ";
         $destructionquerry = mysqli_query($conn, $destruction);
         //header('Location:index.php');

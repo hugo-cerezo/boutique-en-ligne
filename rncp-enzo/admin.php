@@ -151,7 +151,10 @@ include 'header.php';
                     unset($_SESSION["uploadOk"]);
                 }
             }
-            $updatequery = "UPDATE article SET categorie = '$_POST[up_categorie]', title = '$_POST[up_titre]', description = '$_POST[up_textarea]', price = '$_POST[up_prix]', qtt = '$_POST[up_qtt]' WHERE title = '$_POST[up_titre]'";
+            $conq = htmlspecialchars($_POST["up_textarea"], ENT_QUOTES);
+            $updatequery = "UPDATE article SET categorie = '$_POST[up_categorie]', title = '$_POST[up_titre]', description = '$conq', price = '$_POST[up_prix]', qtt = '$_POST[up_qtt]' WHERE title = '$_POST[up_titre]'";
+            var_dump($updatequery);
+            // die;
             $execupdatequery = mysqli_query($conn, $updatequery);
         }
 ?>

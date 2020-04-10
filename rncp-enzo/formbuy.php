@@ -37,7 +37,7 @@ if (isset($_SESSION['login'])) {
         }
     }
 } else {
-    echo '<p>pour pouvoir acheter GET["connected"]';
+    echo '<p style="color: orange; text-align:center;">Connectez-vous';
 }
 
 ?>

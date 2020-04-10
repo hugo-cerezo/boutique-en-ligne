@@ -96,6 +96,10 @@ header input {
     background-color: #86BBD8;
 }
 
+header input:hover {
+    cursor: pointer;
+}
+
 .logo {
     position: absolute;
     width: 10%;
@@ -519,6 +523,10 @@ header input {
 }
 
 /* profil */
+
+.rsmCmd p {
+    color: white;
+}
 
 /* profil admin */
 

@@ -3,17 +3,28 @@ $requestcom = "SELECT * FROM commentaire WHERE title = '" . $row[0][2] . "'";
 $querycom = mysqli_query($conn, $requestcom);
 $rowcom =  mysqli_fetch_all($querycom);
 if ($rowcom == true) {
-// WARNING MESSA IF ROWCOUNT < WHILE TO FIX
+    // WARNING MESSA IF ROWCOUNT < WHILE TO FIX
     $i = 0;
-    while ($i < 3) {
+    $n = count($rowcom);
+    if ($n < 2) {
         echo '<div class="commentaire"><p class="userName">';
-        echo $rowcom[$i][2] . ' ';
+        echo $rowcom[0][2] . ' ';
         echo 'le ';
-        echo $rowcom[$i][4];
+        echo $rowcom[0][4];
         echo '</p><p class="userCom">';
-        echo $rowcom[$i][3];
+        echo $rowcom[0][3];
         echo '</p></div>';
-        ++$i;
+    } else {
+        while ($i < 2) {
+            echo '<div class="commentaire"><p class="userName">';
+            echo $rowcom[$i][2] . ' ';
+            echo 'le ';
+            echo $rowcom[$i][4];
+            echo '</p><p class="userCom">';
+            echo $rowcom[$i][3];
+            echo '</p></div>';
+            ++$i;
+        }
     }
 ?>
     <a class="articleVoir" href="commentaires.php?id='<?php echo $row[0][2]; ?>'">Voir plus...</a>
@@ -43,14 +54,18 @@ if ($rowcom == true) {
 <?php
 
 if (isset($_POST['comsub'])) {
-    if ($_POST["rating"] != 0) {
-        $rating = $_POST["rating"];
-        $ratingsql = "INSERT INTO rating_table VALUES (NULL,$_SESSION[id],'" . $row[0][2] . "', '" . $_POST['rating'] . "' )";
-        $queryrating = mysqli_query($conn, $ratingsql);
-        $request = "UPDATE rating_average SET moy=$note WHERE title ='" . $row[0][2] . "' ";
-        $query = mysqli_query($conn, $request);
+    if (isset($_SESSION["login"])) {
+        if ($_POST["rating"] != 0) {
+            $rating = $_POST["rating"];
+            $ratingsql = "INSERT INTO rating_table VALUES (NULL,$_SESSION[id],'" . $row[0][2] . "', '" . $_POST['rating'] . "' )";
+            $queryrating = mysqli_query($conn, $ratingsql);
+            $request = "UPDATE rating_average SET moy = $note WHERE title ='" . $row[0][2] . "' ";
+            $query = mysqli_query($conn, $request);
+            $requestinscom = "INSERT INTO commentaire VALUES (NULL,'" . $row[0][2] . "','" . $_SESSION['login'] . "', '" . $_POST['com'] . "', NOW())";
+            $queryinscom = mysqli_query($conn, $requestinscom);
+        }
+    } else {
+        echo "<p style='color: orange;'>Merci de vous connecter pour noter et commenter les jeux</p>";
     }
-    $requestinscom = "INSERT INTO commentaire VALUES (NULL,'" . $row[0][2] . "','" . $_SESSION['login'] . "', '" . $_POST['com'] . "', NOW())";
-    $queryinscom = mysqli_query($conn, $requestinscom);
 }
 ?>
