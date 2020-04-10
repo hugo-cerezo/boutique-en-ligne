@@ -1,0 +1,564 @@
+* {
+    font-family: 'Oxygen', sans-serif;
+}
+
+input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+label {
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(18, 40, 54);
+}
+
+a:link {
+    text-decoration: none;
+}
+
+hr {
+    border-color: rgb(102, 192, 244);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(102, 192, 244);
+}
+
+/* Cheatcodes */
+
+#alignAdmin p {
+    color: white;
+}
+
+.spacer {
+    height: 4vh;
+}
+
+.colorw {
+    color: white;
+}
+
+.mr1rem {
+    margin-right: 1rem;
+}
+
+.flexc {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexr {
+    display: flex;
+    flex-direction: row;
+}
+
+.justsb {
+    justify-content: space-between;
+}
+
+.justcenter {
+    justify-content: center;
+    align-items: center;
+}
+
+/* header */
+
+header {
+    height: 9vh;
+    display: flex;
+    position: static;
+    justify-content: center;
+    background-color: rgb(23, 26, 33);
+}
+
+header a {
+    margin-left: 2%;
+}
+
+header a:hover {
+    color: #ffa500;
+}
+
+header .recherchebar {
+    margin-top: 1.2%;
+    margin-left: 5%;
+}
+
+header input {
+    height: 1.5rem;
+    border: none;
+    background-color: #86BBD8;
+}
+
+.logo {
+    position: absolute;
+    width: 10%;
+    left: 10%;
+    top: -3.5%;
+}
+
+.underline {
+    margin-top: -0.9rem;
+    width: 40%;
+    border-bottom: 2px solid rgb(102, 192, 244);
+    margin-left: 23%;
+    margin-right: 22%;
+}
+
+.underline2 {
+    width: 30%;
+    border-bottom: 2px solid rgb(102, 192, 244);
+    margin-left: 36%;
+    margin-right: 22%;
+    margin-bottom: 2rem;
+}
+
+/* form */
+
+.button {
+    color: white;
+    background-color: rgb(28, 59, 80);
+    border: none;
+    width: 4vw;
+}
+
+.button:hover {
+    background-color: #86BBD8;
+    cursor: pointer;
+}
+
+.button1 {
+    color: white;
+    margin-top: 1.2rem;
+    background-color: rgb(28, 59, 80);
+    border: none;
+    width: 4vw;
+    height: 5vh;
+}
+
+.button1:hover {
+    background-color: #86BBD8;
+    cursor: pointer;
+}
+
+.textarea {
+    color: white;
+    background-color: rgba(134, 187, 216, 0.502);
+    border: none;
+    height: 10vh;
+    resize: none;
+}
+
+.textarea2 {
+    color: white;
+    background-color: rgba(134, 187, 216, 0.502);
+    border: none;
+    height: 10vh;
+    resize: none;
+    width: 30vw;
+}
+
+#rating option {
+    background-color: rgba(134, 187, 216, 0.502);
+    border: none;
+}
+
+.select {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(28, 59, 80);
+    border: none;
+}
+
+.nbrSelect {
+    width: 3vw;
+    height: 4.8vh;
+    border: none;
+    text-align: center;
+    font-size: 18pt;
+    color: rgb(102, 192, 244);
+    background-color: rgba(134, 187, 216, 0.5);
+}
+
+.ajtPanier {
+    color: rgb(102, 192, 244);
+    height: 5vh;
+    border: none;
+    background-color: rgb(28, 59, 80);
+}
+
+/* articles et article */
+
+#bjr {
+    text-align: center;
+}
+
+.gameTile {
+    padding: 1vw;
+    background-color: rgba(60, 92, 112, 0.5);
+    border: 4px solid rgba(48, 69, 80, 0.5);
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.gameTile2 {
+    padding: 1vw;
+    background-color: rgba(60, 92, 112, 0.5);
+    border: 4px solid rgba(48, 69, 80, 0.5);
+    width: 30vw;
+    margin-bottom: 1rem;
+}
+
+.gameTitle {
+    color: white;
+    margin-top: 1rem;
+    margin-left: 3rem;
+    font-size: 30pt;
+}
+
+#gridPrice {
+    background-color: rgba(47, 72, 88, 0.5);
+    display: grid;
+    width: 100%;
+    height: 10%;
+    margin: 1rem;
+    grid-template-columns: 4fr 1fr;
+}
+
+#alPri {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top: 3rem;
+    height: 5vh;
+}
+
+#alignPrice {
+    margin-top: 13vh;
+    margin-left: 30vw;
+}
+
+.price {
+    text-justify: distribute;
+    text-align: center;
+    width: 4rem;
+    color: rgb(102, 192, 244);
+    font-size: 18pt;
+    margin-left: 1rem;
+}
+
+#alignFormBuy {
+    margin-top: 1rem;
+}
+
+#alignLeft {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+    height: 15%;
+}
+
+#wrapperArticle {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.content {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+}
+
+.bg {
+    display: flex;
+    justify-content: center;
+}
+
+.imgArticle {
+    width: 100%;
+    z-index: -1000;
+    filter: brightness(15%) blur(5px);
+}
+
+.imgIcon {
+    width: 100%;
+}
+
+.gridArticle {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
+    grid-template-areas: "left right";
+}
+
+#leftSide {
+    grid-area: "left";
+    align-items: center;
+}
+
+#rightSide {
+    padding: 1rem;
+    grid-area: "right";
+    background-color: #2F485880;
+}
+
+.userName {
+    color: rgba(60, 92, 112, 0.767);
+}
+
+.userCom {
+    color: white;
+}
+
+.description {
+    color: white;
+}
+
+.gridArticle p {
+    text-justify: distribute;
+    text-align: justify;
+}
+
+.gridArticle h2 {
+    color: rgb(102, 192, 244);
+}
+
+.articleVoir {
+    color: rgb(102, 192, 244);
+}
+
+.com_article {
+    width: 30vw;
+}
+
+#alignCommentaires {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stylecommentaires {
+    color: white;
+    padding: 2rem;
+    background-color: rgb(23, 26, 33);
+    width: fit-content;
+}
+
+.article {
+    background-color: #CDD5D780;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+    border: 1px solid black;
+    box-shadow: 9px 3px 40px 17px rgba(0, 0, 0, 0.63);
+    padding: 2%;
+}
+
+.articles {
+    border: 2px solid grey;
+    box-shadow: 6px 6px 17px 0px rgba(0, 0, 0, 0.75);
+    background-color: grey;
+    filter: brightness(45%)
+}
+
+.articles:hover {
+    filter: brightness(100%);
+    transform: scale(1.05);
+    z-index: 1000;
+}
+
+.selectioncategorie {
+    display: flex;
+    justify-content: center;
+}
+
+.selectioncategorie a {
+    margin-left: 2%;
+}
+
+.selectioncategorie a:hover {
+    color: #ffa500;
+}
+
+.allarticles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.imgarticles {
+    width: 100%;
+    height: 100%;
+}
+
+.articles {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* index */
+
+.gridIndex {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.gridJeux {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr;
+}
+
+.leftArea {
+    justify-content: center;
+    align-items: center;
+}
+
+.rightArea {
+    align-items: center;
+}
+
+.indexImgJeux {
+    height: 90%;
+    width: 90%;
+    background-color: red;
+}
+
+.titleindex {
+    margin-top: 4rem;
+    color: white;
+    display: flex;
+    margin-left: 12.5%;
+    justify-content: left;
+}
+
+.H2index {
+    color: white;
+}
+
+.articleindex {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* inscription */
+
+.inscription {
+    background-color: #2F4858;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 40%;
+    margin-top: 18%;
+    border: 1px solid black;
+    padding: 25px;
+}
+
+.inscription input {
+    margin-top: 10px;
+    background-color: #86BBD8;
+}
+
+.inscription label {
+    margin-top: 10px;
+}
+
+.inscription .logo {
+    margin-left: 20%;
+}
+
+/* connexion */
+
+.connexion {
+    background-color: #2F4858;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 40%;
+    margin-top: 18%;
+    border: 1px solid black;
+    padding: 25px;
+}
+
+.connexion input {
+    margin-top: 10px;
+    background-color: #86BBD8;
+}
+
+.connexion label {
+    margin-top: 10px;
+}
+
+.connexion .logo {
+    margin-left: 20%;
+}
+
+/* profil */
+
+/* profil admin */
+
+.adminH2 {
+    color: white;
+}
+
+.input {
+    color: white;
+    height: 1.5rem;
+    border: none;
+    background-color: #86BBD8;
+}
+
+.adminBox {
+    width: 50vw;
+    background-color: rgba(47, 72, 88, 0.5);
+    margin-bottom: 5vh;
+    padding: 1vw;
+}
+
+#alignAdmin {
+    display: flex;
+    align-items: center;
+}
+
+.form_admin {
+    width: 30vw;
+}
+
+/* pannier */
+
+/* achat */
+
+.buy {
+    background-color: #2F4858;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 25px;
+}
