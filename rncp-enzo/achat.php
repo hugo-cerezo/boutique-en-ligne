@@ -65,3 +65,6 @@ if ($conn->query($sql) === TRUE) {
 
     ?>
     </div>
+    <?php
+    include("footer.php");
+    ?>

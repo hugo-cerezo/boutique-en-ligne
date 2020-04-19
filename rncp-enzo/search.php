@@ -17,5 +17,3 @@ while ($i < count($row)) {
         </div>';
     $i = $i + 1;
 }
-
-die;

@@ -6,24 +6,51 @@ include 'header.php';
 <div id="alignAdmin" class="flexc">
     <?php
     if ($_SESSION['rang'] == 'admin') {
-        echo '<h2 class="adminH2">welcome admin</h2></br>';
-        echo '<section class="adminBox"><h2 class="adminH2">liste des utilisateurs</h2></br>';
+        echo '<h2 class="adminH2">Bonjour admin</h2></br>';
+        echo '<div id="nav_admin" class="selectioncategorie">';
+    ?>
+
+        <a href='#admin_utilisateurs'>
+            <h2>Utilisateurs</h2>
+        </a>
+        <a href='#admin_commande'>
+            <h2>Commandes</h2>
+        </a>
+        <a href='#admin_stock'>
+            <h2>Stock</h2>
+        </a>
+        <a href='#admin_article'>
+            <h2>Articles</h2>
+        </a>
+        <?php
+
+        echo '</div>';
+
+        echo '<section id="admin_utilisateurs" class="adminBox"><h2 class="adminH2">liste des utilisateurs</h2></br>';
         $requestadmin = 'SELECT * FROM utilisateurs';
         $sqlad = mysqli_query($conn, $requestadmin);
         $row4 = mysqli_fetch_all($sqlad);
+
         $i = 0;
         while ($i < count($row4)) {
             echo "<div class='flexr justsb'>";
             echo "<div>";
-            echo '<p>'.$row4[$i][1] . '</p><br>'; //login
-            echo '<p>'.$row4[$i][4] . '</p><br>'; //email
-            echo '<p>'.$row4[$i][3] . '</p><br>'; //adresse
+            echo '<p>' . $row4[$i][1] . '</p><br>'; //login
+            echo '<p>' . $row4[$i][4] . '</p><br>'; //email
+            echo '<p>' . $row4[$i][3] . '</p><br>'; //adresse
             echo "</div>";
-    ?>
+        ?>
             <div>
                 <form action="" method="post">
-                    <button class="button" type="submit" name="<?php echo $row4[$i][1]; ?>">suprimer utilisateur</button>
+                    <button class="button" type="submit" name="<?php echo $row4[$i][1]; ?>">supprimer utilisateur</button>
                 </form>
+                <?php
+                if (isset($_POST[$row4[$i][1]])) {
+                    $sql = "DELETE FROM utilisateurs WHERE id =" . $row4[$i][0];
+                    $sqlremove = mysqli_query($conn, $sql);
+                    header("location:admin.php");
+                }
+                ?>
             </div>
 </div>
 <hr>
@@ -35,7 +62,7 @@ include 'header.php';
 </section>
 
 <?php
-        echo '<section class="adminBox"><h2 class="adminH2">liste des commandes</h2></br>';
+        echo '<section id="admin_commande" class="adminBox"><h2 class="adminH2">liste des commandes</h2></br>';
         echo '<hr>';
         $comandesadmin = 'SELECT * FROM commande ';
         $sqlad2 = mysqli_query($conn, $comandesadmin);
@@ -50,13 +77,13 @@ include 'header.php';
             echo '</p></br><p> Descriptif de la commande : <br><br>';
             echo $row5[$i][4]; //desciption commande
             echo '</p><p>total :';
-            echo $row5[$i][3]." €"; //total
+            echo $row5[$i][3] . " €"; //total
             echo '</p></br><hr>';
             $i = $i + 1;
         }
         echo '</section>';
 
-        echo '<section class="adminBox"><h2 class="adminH2">gestion des stock et des prix</h2>';
+        echo '<section id="admin_stock" class="adminBox"><h2 class="adminH2">gestion des stock et des prix</h2>';
         $requestadmin3 = 'SELECT * FROM article';
         $sqlad3 = mysqli_query($conn, $requestadmin3);
         $row6 = mysqli_fetch_all($sqlad3);
@@ -82,7 +109,7 @@ include 'header.php';
             }
         }
         echo '</section>';
-        echo "<section class='adminBox'><h2 class='adminH2'>Modification d'article</h2></br>";
+        echo "<section id='admin_article' class='adminBox'><h2 class='adminH2'>Modification d'article</h2></br>";
 ?>
 <section class="gameTile">
     <p>modifier un article</p>
@@ -208,3 +235,6 @@ include 'header.php';
     }
 ?>
 </div>
+<?php
+include("footer.php");
+?>

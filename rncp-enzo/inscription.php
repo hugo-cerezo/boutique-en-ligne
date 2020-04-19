@@ -45,3 +45,6 @@ if (isset($_POST["envoie"])) {
 		<input class="button1" type="submit" name="envoie" value="Se connecter"/>
 	</form>
 </div>
+<?php
+include("footer.php");
+?>

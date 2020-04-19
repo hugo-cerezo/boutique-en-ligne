@@ -50,3 +50,6 @@ $rowcom =  mysqli_fetch_all($querycom);
         ?>
     </div>
 </div>
+<?php
+include("footer.php");
+?>

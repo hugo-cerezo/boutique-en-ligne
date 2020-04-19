@@ -59,7 +59,7 @@ if ($conn->query($sql) === TRUE) {
                 $i = $i + 1;
             }
             echo '<tr><td></td><td></td><td></td><td></td><td>';
-            echo '<p class="colorw">'.$total.' '; 
+            echo '<p class="colorw">' . $total . ' ';
             echo '$</p></td></tr>'
             ?>
         </tbody>
@@ -83,3 +83,6 @@ if ($conn->query($sql) === TRUE) {
 
 ?>
 </div>
+<?php
+include("footer.php");
+?>
