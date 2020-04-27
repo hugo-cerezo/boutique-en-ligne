@@ -3,7 +3,6 @@ $requestcom = "SELECT * FROM commentaire WHERE title = '" . $row[0][2] . "'";
 $querycom = mysqli_query($conn, $requestcom);
 $rowcom =  mysqli_fetch_all($querycom);
 if ($rowcom == true) {
-    // WARNING MESSA IF ROWCOUNT < WHILE TO FIX
     $i = 0;
     $n = count($rowcom);
     if ($n < 2) {
@@ -63,6 +62,7 @@ if (isset($_POST['comsub'])) {
             $query = mysqli_query($conn, $request);
             $requestinscom = "INSERT INTO commentaire VALUES (NULL,'" . $row[0][2] . "','" . $_SESSION['login'] . "', '" . $_POST['com'] . "', NOW())";
             $queryinscom = mysqli_query($conn, $requestinscom);
+            // header("Refresh:0");
         }
     } else {
         echo "<p style='color: orange;'>Merci de vous connecter pour noter et commenter les jeux</p>";

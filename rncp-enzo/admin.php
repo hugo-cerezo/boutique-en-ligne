@@ -147,7 +147,7 @@ include 'header.php';
         <textarea class="textarea2" name="up_textarea"><?php echo $fetchquery['description'] ?></textarea>
         <h2 class='adminH2'>Image</h2>
         <p>Pour une bonne intégration, n'utilisez uniquement des image en 1920*1080</p>
-        <input type="file" name="upInputFile" accept="image/png, image/jpeg">
+        <input type="file" name="upInputFile" accept="image/jpeg">
         <br>
         <input class="button1" type="submit" name='up_art'>
     </form>
@@ -180,8 +180,6 @@ include 'header.php';
             }
             $conq = htmlspecialchars($_POST["up_textarea"], ENT_QUOTES);
             $updatequery = "UPDATE article SET categorie = '$_POST[up_categorie]', title = '$_POST[up_titre]', description = '$conq', price = '$_POST[up_prix]', qtt = '$_POST[up_qtt]' WHERE title = '$_POST[up_titre]'";
-            var_dump($updatequery);
-            // die;
             $execupdatequery = mysqli_query($conn, $updatequery);
         }
 ?>
@@ -189,7 +187,7 @@ include 'header.php';
 <hr>
 <br>
 <h2 class='adminH2'>Creation d'article</h2>
-<form class="gameTile2" action="" method="POST" class="flexc form_admin">
+<form class="gameTile2" action="" method="POST" class="flexc form_admin" enctype="multipart/form-data">
     <h2 class='adminH2'>Titre</h2>
     <input class="input" type="text" name="new_titre">
     <h2 class='adminH2'>Catégorie</h2>
@@ -202,34 +200,34 @@ include 'header.php';
     <textarea class="textarea2" name="new_textarea">description</textarea>
     <h2 class='adminH2'>Image</h2>
     <br>
-    <input type="file" name="new_inputFile" accept="image/png, image/jpeg">
+    <input type="file" name="newInputFile" accept="image/jpeg">
     <input class="button1" type="submit" name='new_art'>
 </form>
 <?php
         if (isset($_POST['new_art'])) {
             $newGameName = $_POST["new_titre"];
-            if (strlen($_FILES["new_inputFile"]["name"]) != 0) {
-                $imgPath = "images/" . basename($_FILES["new_inputFile"]["name"]);
+            if (strlen($_FILES["newInputFile"]["name"]) != 0) {
+                $imgPath = "images/" . basename($_FILES["newInputFile"]["name"]);
                 $imgType = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
-                $newName = "images/" . $newGameName . "." . $imgType;
+                $addnewName = "images/" . $newGameName . "." . $imgType;
                 $_SESSION["uploadOk"] = 1;
                 if ($imgType != "jpg") {
                     echo "Désoler, seulement les fichier JPG accepter.";
                     $_SESSION["uploadOk"] = 0;
                 }
                 if ($_SESSION["uploadOk"] == 1) {
-                    if (file_exists($newName)) {
-                        unlink($newName);
+                    if (file_exists($addnewName)) {
+                        unlink($addnewName);
                     }
-                    move_uploaded_file($_FILES["new_inputFile"]["tmp_name"], $imgPath);
-                    rename($imgPath, $newName);
+                    move_uploaded_file($_FILES["newInputFile"]["tmp_name"], $imgPath);
+                    rename($imgPath, $addnewName);
                     unset($_SESSION["uploadOk"]);
                 } else {
                     echo "Image non insérer";
                     unset($_SESSION["uploadOk"]);
                 }
             }
-            $newarticle = "INSERT INTO article VALUES (NULL,'$_POST[new_categorie]','$_POST[new_titre]','$_POST[new_textarea]',$_POST[new_prix],$_POST[new_qtt],date)";
+            $newarticle = "INSERT INTO article VALUES (NULL,'$_POST[new_categorie]','$_POST[new_titre]','$_POST[new_textarea]',$_POST[new_prix],$_POST[new_qtt],NOW())";
             $sqlad5 = mysqli_query($conn, $newarticle);
         }
     }

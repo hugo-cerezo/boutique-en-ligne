@@ -6,7 +6,6 @@
     <title>Titre de la page</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Oxygen&amp;display=swap" rel="stylesheet">
-    <script src="script.js"></script>
 </head>
 
 <body>
@@ -30,6 +29,13 @@
                 echo '<a href="admin.php"><div><h2>Administration</h2></div></a>';
             }
             echo '<a href="profil.php"><div><h2>Profil</h2></div></a>';
+        ?>
+            <a href='pannier.php'>
+                <div>
+                    <h2>Vôtre pannier</h2>
+                </div>
+            </a>
+        <?php
             echo '<a href="profil.php?exit=true"><div><h2>Déconnexion</h2></div></a>';
         } else {
             echo '<a href="inscription.php"><div><h2>Inscription</h2></div></a>';
@@ -42,11 +48,6 @@
             }
         }
         ?>
-        <a href='pannier.php'>
-            <div>
-                <h2>Vôtre pannier</h2>
-            </div>
-        </a>
         <form class="recherchebar" action="" method="post">
             <input type="text" name="query" />
             <input type="submit" name="Search" value="recherche" />
