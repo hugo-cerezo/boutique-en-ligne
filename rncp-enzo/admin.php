@@ -123,7 +123,7 @@ include 'header.php';
                 }
                 ?>
             </select>
-            <input class="button" type="submit" name='select_value'>
+            <input class="button1" type="submit" name='select_value'>
         </div>
     </form>
 </section>

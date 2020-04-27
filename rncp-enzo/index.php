@@ -11,6 +11,20 @@ $rowmoy = mysqli_fetch_all($querymoy);
 $requestartmoy = "SELECT * FROM article WHERE title ='" . $rowmoy[0][0] . "' ";
 $queryartmoy = mysqli_query($conn, $requestartmoy);
 $moyart = mysqli_fetch_all($queryartmoy);
+if (isset($_GET["buyok"])) {
+?>
+    <div class="thx">
+        <p>Merci pour vôtre achat</p>
+        <form action="" method="POST">
+            <input class="button1" type="submit" value="Retour" name="submit_thx">
+        </form>
+    </div>
+<?php
+    if (isset($_POST["submit_thx"])) {
+        header("location:index.php");
+    }
+    die;
+}
 ?>
 <h1 class="titleindex">Nos articles phares</h1>
 <section class="gridIndex">

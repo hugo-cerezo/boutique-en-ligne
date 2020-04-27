@@ -44,9 +44,7 @@ if ($conn->query($sql) === TRUE) {
         $request3 = "SELECT * FROM utilisateurs WHERE login= '$_SESSION[login]'";
         $query3 = mysqli_query($conn, $request3);
         $row3 =  mysqli_fetch_all($query3);
-        var_dump($row3);
         while ($i < count($row)) {
-            var_dump($description);
             $tot = ($row[$i][2]) * ($row[$i][1]);
             $total = $total + $tot;
             $description = $description . (implode("|", $row[$i])) . '</br>';
@@ -57,9 +55,16 @@ if ($conn->query($sql) === TRUE) {
         //insert into table:commande
         $request2 = "INSERT INTO commande VALUES (NULL,$utilisateur,'$nom',$total,'$description',NOW())";
         $query2 = mysqli_query($conn, $request2);
+        // On soustrait du stock les articles de la commande
+        foreach ($row as $key => $value) {
+            echo $value[0]; // nom jeu
+            echo $value[2]; // qtt
+            $sql_stock = "UPDATE article SET qtt = qtt - $value[2] WHERE title = '$value[0]'";
+            $querystock = mysqli_query($conn, $sql_stock);
+        }
         $destruction = " DROP TABLE pannier_$_SESSION[login] ";
         $destructionquerry = mysqli_query($conn, $destruction);
-        //header('Location:index.php');
+        header('Location:index.php?buyok=true');
     }
 }
 

@@ -42,6 +42,11 @@
             }
         }
         ?>
+        <a href='pannier.php'>
+            <div>
+                <h2>Vôtre pannier</h2>
+            </div>
+        </a>
         <form class="recherchebar" action="" method="post">
             <input type="text" name="query" />
             <input type="submit" name="Search" value="recherche" />
