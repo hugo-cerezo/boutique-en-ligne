@@ -6,24 +6,51 @@ include 'header.php';
 <div id="alignAdmin" class="flexc">
     <?php
     if ($_SESSION['rang'] == 'admin') {
-        echo '<h2 class="adminH2">welcome admin</h2></br>';
-        echo '<section class="adminBox"><h2 class="adminH2">liste des utilisateurs</h2></br>';
+        echo '<h2 class="adminH2">Bonjour admin</h2></br>';
+        echo '<div id="nav_admin" class="selectioncategorie">';
+    ?>
+
+        <a href='#admin_utilisateurs'>
+            <h2>Utilisateurs</h2>
+        </a>
+        <a href='#admin_commande'>
+            <h2>Commandes</h2>
+        </a>
+        <a href='#admin_stock'>
+            <h2>Stock</h2>
+        </a>
+        <a href='#admin_article'>
+            <h2>Articles</h2>
+        </a>
+        <?php
+
+        echo '</div>';
+
+        echo '<section id="admin_utilisateurs" class="adminBox"><h2 class="adminH2">liste des utilisateurs</h2></br>';
         $requestadmin = 'SELECT * FROM utilisateurs';
         $sqlad = mysqli_query($conn, $requestadmin);
         $row4 = mysqli_fetch_all($sqlad);
+
         $i = 0;
         while ($i < count($row4)) {
             echo "<div class='flexr justsb'>";
             echo "<div>";
-            echo '<p>'.$row4[$i][1] . '</p><br>'; //login
-            echo '<p>'.$row4[$i][4] . '</p><br>'; //email
-            echo '<p>'.$row4[$i][3] . '</p><br>'; //adresse
+            echo '<p>' . $row4[$i][1] . '</p><br>'; //login
+            echo '<p>' . $row4[$i][4] . '</p><br>'; //email
+            echo '<p>' . $row4[$i][3] . '</p><br>'; //adresse
             echo "</div>";
-    ?>
+        ?>
             <div>
                 <form action="" method="post">
-                    <button class="button" type="submit" name="<?php echo $row4[$i][1]; ?>">suprimer utilisateur</button>
+                    <button class="button" type="submit" name="<?php echo $row4[$i][1]; ?>">supprimer utilisateur</button>
                 </form>
+                <?php
+                if (isset($_POST[$row4[$i][1]])) {
+                    $sql = "DELETE FROM utilisateurs WHERE id =" . $row4[$i][0];
+                    $sqlremove = mysqli_query($conn, $sql);
+                    header("location:admin.php");
+                }
+                ?>
             </div>
 </div>
 <hr>
@@ -35,7 +62,7 @@ include 'header.php';
 </section>
 
 <?php
-        echo '<section class="adminBox"><h2 class="adminH2">liste des commandes</h2></br>';
+        echo '<section id="admin_commande" class="adminBox"><h2 class="adminH2">liste des commandes</h2></br>';
         echo '<hr>';
         $comandesadmin = 'SELECT * FROM commande ';
         $sqlad2 = mysqli_query($conn, $comandesadmin);
@@ -50,13 +77,13 @@ include 'header.php';
             echo '</p></br><p> Descriptif de la commande : <br><br>';
             echo $row5[$i][4]; //desciption commande
             echo '</p><p>total :';
-            echo $row5[$i][3]." €"; //total
+            echo $row5[$i][3] . " €"; //total
             echo '</p></br><hr>';
             $i = $i + 1;
         }
         echo '</section>';
 
-        echo '<section class="adminBox"><h2 class="adminH2">gestion des stock et des prix</h2>';
+        echo '<section id="admin_stock" class="adminBox"><h2 class="adminH2">gestion des stock et des prix</h2>';
         $requestadmin3 = 'SELECT * FROM article';
         $sqlad3 = mysqli_query($conn, $requestadmin3);
         $row6 = mysqli_fetch_all($sqlad3);
@@ -82,7 +109,7 @@ include 'header.php';
             }
         }
         echo '</section>';
-        echo "<section class='adminBox'><h2 class='adminH2'>Modification d'article</h2></br>";
+        echo "<section id='admin_article' class='adminBox'><h2 class='adminH2'>Modification d'article</h2></br>";
 ?>
 <section class="gameTile">
     <p>modifier un article</p>
@@ -96,7 +123,7 @@ include 'header.php';
                 }
                 ?>
             </select>
-            <input class="button" type="submit" name='select_value'>
+            <input class="button1" type="submit" name='select_value'>
         </div>
     </form>
 </section>
@@ -120,7 +147,7 @@ include 'header.php';
         <textarea class="textarea2" name="up_textarea"><?php echo $fetchquery['description'] ?></textarea>
         <h2 class='adminH2'>Image</h2>
         <p>Pour une bonne intégration, n'utilisez uniquement des image en 1920*1080</p>
-        <input type="file" name="upInputFile" accept="image/png, image/jpeg">
+        <input type="file" name="upInputFile" accept="image/jpeg">
         <br>
         <input class="button1" type="submit" name='up_art'>
     </form>
@@ -151,7 +178,8 @@ include 'header.php';
                     unset($_SESSION["uploadOk"]);
                 }
             }
-            $updatequery = "UPDATE article SET categorie = '$_POST[up_categorie]', title = '$_POST[up_titre]', description = '$_POST[up_textarea]', price = '$_POST[up_prix]', qtt = '$_POST[up_qtt]' WHERE title = '$_POST[up_titre]'";
+            $conq = htmlspecialchars($_POST["up_textarea"], ENT_QUOTES);
+            $updatequery = "UPDATE article SET categorie = '$_POST[up_categorie]', title = '$_POST[up_titre]', description = '$conq', price = '$_POST[up_prix]', qtt = '$_POST[up_qtt]' WHERE title = '$_POST[up_titre]'";
             $execupdatequery = mysqli_query($conn, $updatequery);
         }
 ?>
@@ -159,7 +187,7 @@ include 'header.php';
 <hr>
 <br>
 <h2 class='adminH2'>Creation d'article</h2>
-<form class="gameTile2" action="" method="POST" class="flexc form_admin">
+<form class="gameTile2" action="" method="POST" class="flexc form_admin" enctype="multipart/form-data">
     <h2 class='adminH2'>Titre</h2>
     <input class="input" type="text" name="new_titre">
     <h2 class='adminH2'>Catégorie</h2>
@@ -172,36 +200,39 @@ include 'header.php';
     <textarea class="textarea2" name="new_textarea">description</textarea>
     <h2 class='adminH2'>Image</h2>
     <br>
-    <input type="file" name="new_inputFile" accept="image/png, image/jpeg">
+    <input type="file" name="newInputFile" accept="image/jpeg">
     <input class="button1" type="submit" name='new_art'>
 </form>
 <?php
         if (isset($_POST['new_art'])) {
             $newGameName = $_POST["new_titre"];
-            if (strlen($_FILES["new_inputFile"]["name"]) != 0) {
-                $imgPath = "images/" . basename($_FILES["new_inputFile"]["name"]);
+            if (strlen($_FILES["newInputFile"]["name"]) != 0) {
+                $imgPath = "images/" . basename($_FILES["newInputFile"]["name"]);
                 $imgType = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
-                $newName = "images/" . $newGameName . "." . $imgType;
+                $addnewName = "images/" . $newGameName . "." . $imgType;
                 $_SESSION["uploadOk"] = 1;
                 if ($imgType != "jpg") {
                     echo "Désoler, seulement les fichier JPG accepter.";
                     $_SESSION["uploadOk"] = 0;
                 }
                 if ($_SESSION["uploadOk"] == 1) {
-                    if (file_exists($newName)) {
-                        unlink($newName);
+                    if (file_exists($addnewName)) {
+                        unlink($addnewName);
                     }
-                    move_uploaded_file($_FILES["new_inputFile"]["tmp_name"], $imgPath);
-                    rename($imgPath, $newName);
+                    move_uploaded_file($_FILES["newInputFile"]["tmp_name"], $imgPath);
+                    rename($imgPath, $addnewName);
                     unset($_SESSION["uploadOk"]);
                 } else {
                     echo "Image non insérer";
                     unset($_SESSION["uploadOk"]);
                 }
             }
-            $newarticle = "INSERT INTO article VALUES (NULL,'$_POST[new_categorie]','$_POST[new_titre]','$_POST[new_textarea]',$_POST[new_prix],$_POST[new_qtt],date)";
+            $newarticle = "INSERT INTO article VALUES (NULL,'$_POST[new_categorie]','$_POST[new_titre]','$_POST[new_textarea]',$_POST[new_prix],$_POST[new_qtt],NOW())";
             $sqlad5 = mysqli_query($conn, $newarticle);
         }
     }
 ?>
 </div>
+<?php
+include("footer.php");
+?>

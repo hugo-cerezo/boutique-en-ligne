@@ -11,6 +11,20 @@ $rowmoy = mysqli_fetch_all($querymoy);
 $requestartmoy = "SELECT * FROM article WHERE title ='" . $rowmoy[0][0] . "' ";
 $queryartmoy = mysqli_query($conn, $requestartmoy);
 $moyart = mysqli_fetch_all($queryartmoy);
+if (isset($_GET["buyok"])) {
+?>
+    <div class="thx">
+        <p>Merci pour vôtre achat</p>
+        <form action="" method="POST">
+            <input class="button1" type="submit" value="Retour" name="submit_thx">
+        </form>
+    </div>
+<?php
+    if (isset($_POST["submit_thx"])) {
+        header("location:index.php");
+    }
+    die;
+}
 ?>
 <h1 class="titleindex">Nos articles phares</h1>
 <section class="gridIndex">
@@ -43,18 +57,5 @@ $moyart = mysqli_fetch_all($queryartmoy);
 </section>
 
 <?php
-//dernier article
-// echo '<div class="articleindex">
-//         <h2>Le plus recent</h2>
-//         <h2>mieux noté</h2>
-//         <h2>Le plus vendu</h2>
-//         <div>
-//         <h2>' . $row[0][2] . '</h2>
-//         <img src="images/' . $row[0][2] . '.jpg"></br>
-//         <a href="article.php?id=' . $row[0][2] . ' ">voir plus</a>  
-//         </div>  
-//     </div>';
-//le mieux noter
-//systeme de notation off
-
+include("footer.php");
 ?>

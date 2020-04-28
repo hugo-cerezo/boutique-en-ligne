@@ -41,11 +41,10 @@
         //affichage des commandes
         $i = 0;
         while ($i < count($row2)) {
-            echo $row2[$i][5]; //date
-            echo '</br>';
-            echo $row2[$i][4]; //desciptiopn commande
-            echo 'total :';
-            echo $row2[$i][3]; //total
+            echo '<div class="rsmCmd"><p>'.$row2[$i][5].'</p>'; //date
+            echo '<p>'.$row2[$i][4].'</p>'; //desciptiopn commande
+            echo '<p>total : ';
+            echo $row2[$i][3].' €</p></div>'; //total
             $i = $i + 1;
         }
         echo "</section>";
@@ -65,3 +64,6 @@
 </body>
 
 </html>
+<?php
+include("footer.php");
+?>

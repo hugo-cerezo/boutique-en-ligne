@@ -30,3 +30,6 @@ if (isset($_POST["envoie"])) {
 		<input class="button1" type="submit" value="Se connecter" name="envoie" />
 	</form>
 </div>
+<?php
+include("footer.php");
+?>

@@ -21,7 +21,7 @@ if (isset($_POST["envoie"])) {
 
 		if ($_SESSION["validation"]) {
 			
-			$request2 = "INSERT INTO utilisateurs VALUES (NULL,'".$_POST["login"]."','".password_hash($_POST["mdp"],PASSWORD_BCRYPT)."','$_POST[adresse]','$_POST[mail]','user');";
+			$request2 = "INSERT INTO utilisateurs VALUES (NULL,'".$_POST["login"]."','".password_hash($_POST["mdp"],PASSWORD_BCRYPT)."','htmlspecialchars($_POST[adresse])','$_POST[mail]','user');";
 			$query2 = mysqli_query($conn, $request2);
 			var_dump($request2);
 			header("location:connexion.php");
@@ -45,3 +45,6 @@ if (isset($_POST["envoie"])) {
 		<input class="button1" type="submit" name="envoie" value="Se connecter"/>
 	</form>
 </div>
+<?php
+include("footer.php");
+?>
