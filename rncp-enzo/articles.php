@@ -14,7 +14,8 @@ $row = mysqli_fetch_all($sql);
     <a href='articles.php?categorie=AAA '>
         <h2>AAA</h2>
     </a>
-    <a href='articles.php?categorie=playwth '>
+    <a href='articles.php?categorie=Play With Friends
+'>
         <h2>Play With Friends</h2>
     </a>
     <a href='articles.php?categorie=retro '>
